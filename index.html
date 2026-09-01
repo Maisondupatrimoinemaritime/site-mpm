@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maison du patrimoine maritime de Camaret-sur-Mer</title>
+<meta name="description" content="Association en cours de création à Camaret-sur-Mer, pour la collection de la Salle de Venise et le patrimoine maritime de la commune, 15 quai Kléber. Site en construction.">
+
+<style>
+  * { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #14110d;
+  }
+
+  /* Texte réservé aux lecteurs d'écran et aux moteurs de recherche,
+     le titre, l'adresse et le statut existent en image mais pas en texte réel */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .fond {
+    position: fixed;
+    inset: 0;
+  }
+  .fond img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="sr-only">Maison du patrimoine maritime de Camaret-sur-Mer, 15 quai Kléber, 29570 Camaret-sur-Mer, Salle de Venise. Association en cours de création, site en construction.</h1>
+
+<div class="fond">
+  <picture>
+    <source media="(orientation: portrait)" srcset="./images/salle-mobile.webp">
+    <img src="./images/salle-desktop.webp" alt="La Salle de Venise, avec ses vitrines, une maquette de voilier suspendue et des mannequins en ciré jaune, mention site en construction">
+  </picture>
+</div>
+
+</body>
+</html>
