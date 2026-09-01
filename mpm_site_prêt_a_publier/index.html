@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison du patrimoine maritime de Camaret-sur-Mer</title>
+<meta name="description" content="Association en cours de création à Camaret-sur-Mer, pour la collection de la Salle de Venise et le patrimoine maritime de la commune.">
+
+<style>
+  @font-face {
+    font-family: "Bilzig";
+    src: url("./fonts/Bilzig-Black.otf") format("opentype");
+    font-weight: 800;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Bilzig";
+    src: url("./fonts/Bilzig-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Bilzig";
+    src: url("./fonts/Bilzig-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Bilzig";
+    src: url("./fonts/Bilzig-Italic.otf") format("opentype");
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  :root {
+    --jaune: #f7c600;
+    --noir: #111111;
+    --blanc: #ffffff;
+    --gris: #5a5a52;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--blanc);
+    color: var(--noir);
+    font-family: "Bilzig", Georgia, serif;
+    line-height: 1.55;
+  }
+
+  a { color: var(--noir); }
+
+  .page { max-width: 760px; margin: 0 auto; padding: 0 1.4rem; }
+
+  /* HERO */
+  .hero { padding: 2.2rem 0 0; }
+  .accroche {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.15rem;
+    text-align: center;
+    margin: 0 0 1.6rem;
+  }
+
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .badge-date {
+    background: var(--jaune);
+    border-radius: 50% / 46%;
+    width: 128px;
+    height: 108px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    transform: rotate(-4deg);
+  }
+  .badge-date .jour { font-weight: 800; font-size: 2.6rem; line-height: 1; }
+  .badge-date .mois { font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; }
+
+  h1.headline {
+    font-weight: 800;
+    font-size: clamp(2.1rem, 8vw, 3.2rem);
+    text-align: center;
+    margin: 0.4rem 0 0.6rem;
+    letter-spacing: 0.01em;
+  }
+
+  .sous-titre {
+    text-align: center;
+    max-width: 34rem;
+    margin: 0 auto 1.6rem;
+    font-size: 1.05rem;
+  }
+
+  /* ILLUSTRATION */
+  .illustration {
+    background: var(--noir);
+    margin: 0 0 0;
+    padding: 1.6rem 0 0.4rem;
+    overflow: hidden;
+  }
+  .illustration img {
+    display: block;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  /* BARRES SURLIGNÉES */
+  .infos {
+    background: var(--noir);
+    padding: 0 0 2.2rem;
+  }
+  .surlignes { max-width: 620px; margin: 0 auto; padding: 0 1.4rem; }
+  .surligne {
+    display: inline;
+    background: var(--jaune);
+    color: var(--noir);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0.15em 0.35em;
+    line-height: 1.9;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .surlignes p { margin: 0.5rem 0; }
+
+  /* STATUT */
+  .statut {
+    padding: 2.6rem 0 2rem;
+  }
+  .statut h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0 0 0.9rem;
+  }
+  .statut p { margin: 0.7rem 0; }
+  .statut .maj {
+    font-size: 0.85rem;
+    color: var(--gris);
+    font-style: italic;
+  }
+
+  /* CURSEUR / TIMELINE */
+  .parcours { padding: 1rem 0 2.6rem; }
+  .parcours h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0 0 0.3rem;
+  }
+  .parcours .note {
+    color: var(--gris);
+    font-size: 0.9rem;
+    margin: 0 0 1.2rem;
+    font-style: italic;
+  }
+
+  .curseur-zone { position: relative; }
+
+  .curseur-fleches {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .curseur-fleches button {
+    font-family: "Bilzig", serif;
+    font-weight: 800;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    border: 2px solid var(--noir);
+    background: var(--blanc);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .curseur-fleches button:hover { background: var(--jaune); }
+
+  .curseur {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    gap: 2.6rem;
+    padding: 0.6rem 1.2rem 1.2rem;
+    scrollbar-width: thin;
+  }
+  .curseur::-webkit-scrollbar { height: 6px; }
+  .curseur::-webkit-scrollbar-thumb { background: var(--jaune); border-radius: 3px; }
+
+  .etape {
+    flex: 0 0 auto;
+    width: 150px;
+    scroll-snap-align: start;
+    text-align: center;
+    position: relative;
+    padding-top: 2.4rem;
+  }
+  .etape::before {
+    content: "";
+    position: absolute;
+    top: 0.9rem;
+    left: -1.3rem;
+    width: calc(100% + 2.6rem);
+    height: 2px;
+    background: var(--noir);
+    z-index: 0;
+  }
+  .etape:first-child::before { left: 50%; width: calc(50% + 1.3rem); }
+  .etape:last-child::before { width: calc(50% + 1.3rem); }
+  .etape.en-attente::before { background-image: linear-gradient(to right, var(--noir) 40%, transparent 0%); background-size: 8px 2px; background-repeat: repeat-x; background-color: transparent; }
+
+  .pastille {
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    background: var(--jaune);
+    border: 2px solid var(--noir);
+    margin: 0 auto 0.7rem;
+    position: relative;
+    z-index: 1;
+  }
+  .etape.en-attente .pastille {
+    background: var(--blanc);
+    border-style: dashed;
+  }
+  .etape .date {
+    font-weight: 800;
+    font-size: 0.95rem;
+    margin: 0 0 0.25rem;
+  }
+  .etape .libelle {
+    font-size: 0.85rem;
+    color: var(--noir);
+    font-weight: 400;
+  }
+  .etape.en-attente .libelle { color: var(--gris); font-style: italic; }
+
+  footer {
+    border-top: 3px solid var(--noir);
+    padding: 1.6rem 0 2.2rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  footer .nom { font-weight: 700; }
+  footer a { text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    .badge-date { width: 108px; height: 92px; }
+    .badge-date .jour { font-size: 2.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page hero">
+  <p class="accroche">Association Maison du patrimoine maritime</p>
+  <div class="hero-top">
+    <div class="badge-date">
+      <span class="jour">5</span>
+      <span class="mois">SEPTEMBRE</span>
+    </div>
+  </div>
+  <h1 class="headline">Nouvelle équipe !</h1>
+  <p class="sous-titre">Venez échanger avec les membres du bureau autour d'un café et pré-adhérez à l'association.</p>
+</div>
+
+<div class="illustration">
+  <img src="./images/bateau.webp" alt="Gravure d'un bateau en chantier, avec trois personnes sur le pont" loading="lazy">
+</div>
+
+<div class="infos">
+  <div class="surlignes">
+    <p><span class="surligne">AU CARREFOUR DES ASSOCIATIONS DE 9H30 À 12H</span></p>
+    <p><span class="surligne">SALLE SAINT-IVES, 1 RUE DU LOC'H</span></p>
+    <p><span class="surligne">CAMARET-SUR-MER</span></p>
+  </div>
+</div>
+
+<div class="page statut">
+  <h2>Où en est l'association</h2>
+  <p>
+    Une nouvelle association est en train de naître à Camaret-sur-Mer, pour veiller sur la collection de la Salle de Venise et faire vivre le patrimoine maritime de la commune. Ses statuts ont été adoptés le 26 août 2026 et la déclaration a été déposée en sous-préfecture de Brest le 27 août. La publication au Journal officiel, qui achèvera sa création, n'est pas encore confirmée à ce jour.
+  </p>
+  <p class="maj">Page mise à jour le 1er septembre 2026.</p>
+</div>
+
+<div class="page parcours">
+  <h2>Les grandes étapes</h2>
+  <p class="note">Faites glisser pour voir la suite</p>
+
+  <div class="curseur-zone">
+    <div class="curseur-fleches">
+      <button type="button" aria-label="Étape précédente" data-dir="-1">‹</button>
+      <button type="button" aria-label="Étape suivante" data-dir="1">›</button>
+    </div>
+
+    <div class="curseur" id="curseur">
+      <div class="etape">
+        <div class="pastille"></div>
+        <p class="date">26 août</p>
+        <p class="libelle">Assemblée générale constitutive, statuts adoptés</p>
+      </div>
+      <div class="etape">
+        <div class="pastille"></div>
+        <p class="date">27 août</p>
+        <p class="libelle">Dépôt des statuts en sous-préfecture de Brest</p>
+      </div>
+      <div class="etape">
+        <div class="pastille"></div>
+        <p class="date">5 septembre</p>
+        <p class="libelle">Carrefour des associations, salle Saint-Ives</p>
+      </div>
+      <div class="etape">
+        <div class="pastille"></div>
+        <p class="date">19 septembre</p>
+        <p class="libelle">Réouverture prévue de la Salle de Venise, Journées européennes du patrimoine</p>
+      </div>
+      <div class="etape en-attente">
+        <div class="pastille"></div>
+        <p class="date">À venir</p>
+        <p class="libelle">Publication au Journal officiel des associations</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p class="nom">Maison du patrimoine maritime de Camaret-sur-Mer</p>
+  <p>Association en cours de création · <a href="mailto:demat@mpm.bzh">demat@mpm.bzh</a></p>
+</footer>
+
+<script>
+  var curseur = document.getElementById('curseur');
+  document.querySelectorAll('.curseur-fleches button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var dir = parseInt(btn.getAttribute('data-dir'), 10);
+      curseur.scrollBy({ left: dir * 190, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
