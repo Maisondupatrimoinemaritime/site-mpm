@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aper&ccedil;u &mdash; page d'accueil MPM</title>
+<style>
+  /* --- Police Bilzig, huit graisses/styles, &agrave; ajouter dans un
+     dossier "fonts" &agrave; c&ocirc;t&eacute; d'index.html --- */
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigRegular.otf') format('opentype'); font-weight: 400; font-style: normal; }
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigItalic.otf') format('opentype'); font-weight: 400; font-style: italic; }
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigMedium.otf') format('opentype'); font-weight: 500; font-style: normal; }
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigMediumItalic.otf') format('opentype'); font-weight: 500; font-style: italic; }
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigBold.otf') format('opentype'); font-weight: 700; font-style: normal; }
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigBoldItalic.otf') format('opentype'); font-weight: 700; font-style: italic; }
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigBlack.otf') format('opentype'); font-weight: 900; font-style: normal; }
+  @font-face { font-family: 'Bilzig'; src: url('fonts/BilzigBlackItalic.otf') format('opentype'); font-weight: 900; font-style: italic; }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Bilzig', Arial, sans-serif;
+    color: #1c1c1c;
+    background: #faf7f2;
+  }
+
+  /* --- Photo d'accueil avec les zones cliquables ---
+     Deux jeux d'images : un pour desktop (une seule photo composite,
+     h&eacute;ros + galerie empil&eacute;s), un pour mobile (deux photos
+     s&eacute;par&eacute;es, "main" puis "bottom", l'une sous l'autre). */
+  .hero-block {
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  #hero-desktop { aspect-ratio: 1708 / 1920; background-image: url('hero-desktop.png'); }
+  #hero-mobile-main   { aspect-ratio: 1080 / 1920; background-image: url('hero-mobile-main.png'); }
+  #hero-mobile-bottom { aspect-ratio: 1080 / 1920; background-image: url('hero-mobile-bottom.png'); }
+
+  .only-desktop { display: block; }
+  .only-mobile  { display: none; }
+  @media (max-width: 700px) {
+    .only-desktop { display: none; }
+    .only-mobile  { display: block; }
+  }
+
+  /* Zones cliquables invisibles, positionn&eacute;es en pourcentage par-dessus
+     les boutons et ic&ocirc;nes d&eacute;j&agrave; dessin&eacute;s dans chaque
+     image (positions rep&eacute;r&eacute;es automatiquement pixel par pixel). */
+  .hotspot {
+    position: absolute;
+    display: block;
+  }
+
+  /* Desktop (1708 x 1920) */
+  #hero-desktop .hs-apropos   { left: 44.4%; top: 16.9%; width: 11.1%; height: 2.7%; }
+  #hero-desktop .hs-rejoignez { left: 39.8%; top: 20.8%; width: 20.4%; height: 2.9%; }
+  #hero-desktop .hs-email     { left: 43.7%; top: 42.6%; width: 2.6%; height: 2%; }
+  #hero-desktop .hs-facebook  { left: 47.1%; top: 42.6%; width: 2.6%; height: 2%; }
+  #hero-desktop .hs-instagram { left: 50.2%; top: 42.6%; width: 2.6%; height: 2%; }
+  #hero-desktop .hs-whatsapp  { left: 53.3%; top: 42.6%; width: 2.6%; height: 2%; }
+
+  /* Mobile "main" et "bottom" (1080 x 1920 chacune) : m&ecirc;me rang&eacute;e
+     d'ic&ocirc;nes de contact aux m&ecirc;mes coordonn&eacute;es dans les deux
+     images, puisque les deux partagent le m&ecirc;me gabarit de pied de page. */
+  #hero-mobile-main .hs-apropos   { left: 39.6%; top: 21.4%; width: 20.9%; height: 3.2%; }
+  #hero-mobile-main .hs-rejoignez { left: 30.6%; top: 26%;   width: 38.9%; height: 3.5%; }
+
+  #hero-mobile-main .hs-email,
+  #hero-mobile-bottom .hs-email     { left: 39.5%; top: 87%; width: 4.5%; height: 3%; }
+  #hero-mobile-main .hs-facebook,
+  #hero-mobile-bottom .hs-facebook  { left: 45.7%; top: 87%; width: 4.5%; height: 3%; }
+  #hero-mobile-main .hs-instagram,
+  #hero-mobile-bottom .hs-instagram { left: 52.4%; top: 87%; width: 4.5%; height: 3%; }
+  #hero-mobile-main .hs-whatsapp,
+  #hero-mobile-bottom .hs-whatsapp  { left: 59.2%; top: 87%; width: 4.5%; height: 3%; }
+
+  /* --- Section "&Agrave; propos" (contenu &agrave; venir) --- */
+  #apropos {
+    max-width: 640px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+  }
+  #apropos h2 {
+    font-family: 'Bilzig', Arial, sans-serif;
+    font-weight: 700;
+  }
+  #apropos p {
+    color: #555;
+    font-style: italic;
+  }
+
+  /* --- Section formulaire --- */
+  #mpm-contact {
+    max-width: 480px;
+    margin: 3rem auto 4rem;
+    padding: 1.5rem;
+  }
+  #mpm-contact h2 {
+    font-family: 'Bilzig', Arial, sans-serif;
+    font-weight: 700;
+  }
+  #mpm-contact label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+  #mpm-contact input,
+  #mpm-contact textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+    font-family: 'Bilzig', Arial, sans-serif;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+  }
+  #mpm-contact button {
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #1f4e5f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Version desktop : une seule photo composite (h&eacute;ros + galerie) -->
+  <div class="hero-block only-desktop" id="hero-desktop">
+    <a class="hotspot hs-apropos apropos-toggle"   href="#" title="&Agrave; propos"></a>
+    <a class="hotspot hs-rejoignez" href="#mpm-contact" title="Rejoignez l'&eacute;quipe"></a>
+    <a class="hotspot hs-email"     href="mailto:demat@mpm.bzh" title="Nous &eacute;crire"></a>
+    <a class="hotspot hs-facebook"  href="https://www.facebook.com/mpm.bzh" title="Facebook"></a>
+    <a class="hotspot hs-instagram" href="https://www.instagram.com/mpm.bzh/" title="Instagram"></a>
+    <a class="hotspot hs-whatsapp"  href="https://wa.me/message/PC6UYTEAYPLMJ1" title="WhatsApp"></a>
+  </div>
+
+  <!-- Version mobile : deux photos empil&eacute;es, "main" puis "bottom" -->
+  <div class="only-mobile">
+    <div class="hero-block" id="hero-mobile-main">
+      <a class="hotspot hs-apropos apropos-toggle"   href="#" title="&Agrave; propos"></a>
+      <a class="hotspot hs-rejoignez" href="#mpm-contact" title="Rejoignez l'&eacute;quipe"></a>
+      <a class="hotspot hs-email"     href="mailto:demat@mpm.bzh" title="Nous &eacute;crire"></a>
+      <a class="hotspot hs-facebook"  href="https://www.facebook.com/mpm.bzh" title="Facebook"></a>
+      <a class="hotspot hs-instagram" href="https://www.instagram.com/mpm.bzh/" title="Instagram"></a>
+      <a class="hotspot hs-whatsapp"  href="https://wa.me/message/PC6UYTEAYPLMJ1" title="WhatsApp"></a>
+    </div>
+    <div class="hero-block" id="hero-mobile-bottom">
+      <a class="hotspot hs-email"     href="mailto:demat@mpm.bzh" title="Nous &eacute;crire"></a>
+      <a class="hotspot hs-facebook"  href="https://www.facebook.com/mpm.bzh" title="Facebook"></a>
+      <a class="hotspot hs-instagram" href="https://www.instagram.com/mpm.bzh/" title="Instagram"></a>
+      <a class="hotspot hs-whatsapp"  href="https://wa.me/message/PC6UYTEAYPLMJ1" title="WhatsApp"></a>
+    </div>
+  </div>
+
+  <section id="apropos" hidden>
+    <h2>&Agrave; propos</h2>
+    <p>
+      La Maison du patrimoine maritime de Camaret-sur-Mer assure la
+      conservation, la valorisation et la m&eacute;diation du patrimoine
+      maritime de la commune, dans le cadre d'un partenariat avec la
+      municipalit&eacute; qui met &agrave; disposition la Salle de Venise au
+      15 quai Kl&eacute;ber et la collection qu'elle abrite. R&eacute;unie
+      depuis 1984 par les dons et pr&ecirc;ts des familles camar&eacute;toises,
+      cette collection t&eacute;moigne de pr&egrave;s de 3 si&egrave;cles
+      d'histoire de la p&ecirc;che locale et de transformation du port.
+    </p>
+    <p>
+      L'association pr&eacute;pare l'ouverture du site au public dans des
+      conditions de conservation optimales et conduit, dans ce but, le
+      r&eacute;colement scientifique complet de la collection en nouant des
+      partenariats de formation avec les &eacute;tablissements d'enseignement
+      de la conservation-restauration.
+    </p>
+  </section>
+
+  <section id="mpm-contact">
+    <h2>Pr&eacute;-adh&eacute;rez et rejoignez l'&eacute;quipe&nbsp;!</h2>
+    <p>
+      Vous souhaitez devenir membre&nbsp;? Laissez-nous vos coordonn&eacute;es
+      ci-dessous pour &ecirc;tre inform&eacute; de notre premi&egrave;re
+      Assembl&eacute;e g&eacute;n&eacute;rale, qui marquera l'ouverture des
+      adh&eacute;sions.
+    </p>
+
+    <form id="mpm-form" action="https://docs.google.com/forms/d/e/1FAIpQLSeRM8XyXkx3ytJMLd4XM0bZtHzHrtr9k1Ebogwz_sTpTc8Dnw/formResponse" method="POST">
+      <label for="mpm-nom">Nom</label>
+      <input type="text" id="mpm-nom" name="entry.2005620554" required>
+
+      <label for="mpm-prenom">Pr&eacute;nom</label>
+      <input type="text" id="mpm-prenom" name="entry.803065571" required>
+
+      <label for="mpm-email">Email</label>
+      <input type="email" id="mpm-email" name="entry.1045781291" required>
+
+      <label for="mpm-commentaire">Commentaire</label>
+      <textarea id="mpm-commentaire" name="entry.1013027210" rows="4"></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <p id="mpm-merci" hidden>Merci, votre message a bien &eacute;t&eacute; envoy&eacute;.</p>
+  </section>
+
+  <script>
+    // Le paragraphe "&Agrave; propos" reste masqu&eacute; tant qu'on n'a pas cliqu&eacute;
+    // sur le bouton correspondant dans la photo (desktop ou mobile), puis
+    // s'affiche en dessous.
+    document.querySelectorAll('.apropos-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var section = document.getElementById('apropos');
+        section.hidden = !section.hidden;
+        if (!section.hidden) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    document.getElementById('mpm-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = new FormData(form);
+      fetch(form.action, { method: 'POST', mode: 'no-cors', body: data })
+        .finally(function () {
+          form.reset();
+          document.getElementById('mpm-merci').hidden = false;
+        });
+    });
+  </script>
+
+</body>
+</html>
